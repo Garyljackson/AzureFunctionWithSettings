@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AzureFunctionWithSettings
@@ -13,7 +12,8 @@ namespace AzureFunctionWithSettings
             var host = new HostBuilder()
                 .ConfigureAppConfiguration(builder =>
                 {
-                    builder.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
+                    builder.AddJsonFile("appsettings.json", true, true)
+                        .AddUserSecrets(Assembly.GetExecutingAssembly(), true);
                 })
                 .ConfigureFunctionsWorkerDefaults()
                 .ConfigureServices(services =>
