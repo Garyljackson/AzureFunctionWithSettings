@@ -13,8 +13,7 @@ namespace AzureFunctionWithSettings
             var host = new HostBuilder()
                 .ConfigureAppConfiguration(builder =>
                 {
-                    builder.SetBasePath(Environment.CurrentDirectory)
-                        .AddJsonFile("appsettings.json", true, true)
+                    builder.AddJsonFile("appsettings.json", true, true)
                         .AddUserSecrets(Assembly.GetExecutingAssembly(), true);
                 })
                 .ConfigureFunctionsWorkerDefaults()
