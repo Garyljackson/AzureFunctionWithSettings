@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace AzureFunctionWithSettings
 {
@@ -12,7 +13,8 @@ namespace AzureFunctionWithSettings
             var host = new HostBuilder()
                 .ConfigureAppConfiguration(builder =>
                 {
-                    builder.AddJsonFile("appsettings.json", true, true)
+                    builder.SetBasePath(Environment.CurrentDirectory)
+                        .AddJsonFile("appsettings.json", true, true)
                         .AddUserSecrets(Assembly.GetExecutingAssembly(), true);
                 })
                 .ConfigureFunctionsWorkerDefaults()
